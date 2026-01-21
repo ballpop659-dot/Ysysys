@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bio Link | Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CONFIGURATION --- */
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --card-hover: #2C2C2C;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --accent-color: #FFFFFF;
+            --icon-bg: #2A2A2A;
+            --border-radius: 16px;
+            
+            /* Status Colors */
+            --status-open-bg: rgba(46, 204, 113, 0.1); /* พื้นหลังเขียวจางๆ */
+            --status-open-text: #2ecc71; /* ข้อความสีเขียว */
+            --status-busy-bg: rgba(231, 76, 60, 0.15);
+            --status-busy-text: #e74c3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Kanit', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; display: flex; justify-content: center; line-height: 1.6; }
+
+        .container {
+            width: 100%; max-width: 480px; padding: 60px 24px;
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* Profile Section */
+        .profile { text-align: center; margin-bottom: 35px; }
+        .profile-img-container {
+            width: 120px; height: 120px; margin: 0 auto 20px; position: relative;
+        }
+        .profile-img {
+            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+            border: 2px solid #333;
+        }
+        h1 {
+            font-size: 1.8rem; font-weight: 600; color: var(--text-primary);
+            margin-bottom: 4px; letter-spacing: 0.5px;
+        }
+        .bio-text {
+            color: var(--text-secondary); font-size: 0.95rem; font-weight: 300;
+            margin-bottom: 16px;
+        }
+
+        /* --- UPDATED: Status Badge Styling --- */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px 6px 8px; /* ปรับ padding ให้เข้ากับไอคอนใหม่ */
+            border-radius: 30px; /* โค้งมนขึ้น */
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* สถานะ: รับงาน (Open) - ใช้ไอคอนติ๊กถูก */
+        .status-badge.open {
+            background-color: var(--status-open-bg);
+            color: var(--status-open-text);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        /* ✅ กล่องวงกลมสีดำสำหรับไอคอนติ๊กถูก (New Feature) */
+        .status-check-box {
+            width: 22px;
+            height: 22px;
+            background-color: #000000; /* Pure Black Background */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* ไอคอนติ๊กถูกสีขาวด้านใน */
+        .status-check-box i {
+            color: #FFFFFF; /* Pure White Icon */
+            font-size: 0.7rem;
+        }
+
+        /* สถานะ: ไม่ว่าง (Busy) - ยังคงใช้จุดกะพริบแบบเดิม เพราะสื่อถึงการแจ้งเตือนได้ดี */
+        .status-badge.busy {
+            background-color: var(--status-busy-bg);
+            color: var(--status-busy-text);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            padding-left: 14px; /* ปรับ padding สำหรับแบบจุด */
+        }
+
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background-color: currentColor;
+            margin-right: 10px;
+            box-shadow: 0 0 8px currentColor;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+            70% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
+            100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Tabs & Links (คงเดิม) */
+        .tabs {
+            display: flex; background: #181818; border-radius: var(--border-radius);
+            padding: 6px; margin-bottom: 30px;
+        }
+        .tab-btn {
+            flex: 1; padding: 12px; border: none; background: transparent;
+            color: #666; cursor: pointer; border-radius: 12px;
+            font-weight: 500; font-size: 1rem; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .tab-btn.active {
+            background: var(--card-bg); color: var(--text-primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .tab-content {
+            display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-direction: column; gap: 14px; flex-grow: 1;
+        }
+        .tab-content.active-content { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .link-card {
+            display: flex; align-items: center; background: var(--card-bg);
+            padding: 18px 20px; border-radius: var(--border-radius);
+            text-decoration: none; color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.05); transition: all 0.2s ease;
+        }
+        .link-card:hover {
+            transform: translateY(-3px); background: var(--card-hover);
+            border-color: rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .icon-box {
+            width: 40px; height: 40px; background: var(--icon-bg); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; margin-right: 18px;
+            font-size: 1.2rem; color: var(--text-secondary); transition: 0.2s;
+        }
+        .link-card:hover .icon-box { background: var(--text-primary); color: var(--bg-color); }
+        .link-card span { flex-grow: 1; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.3px; }
+        .arrow { color: #444; font-size: 0.9rem; transition: 0.2s; }
+        .link-card:hover .arrow { color: var(--text-primary); transform: translateX(5px); }
+        footer { text-align: center; margin-top: 50px; color: #444; font-size: 0.8rem; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="profile">
+            <div class="profile-img-container">
+                <img src="https://ui-avatars.com/api/?name=Your+Name&background=2A2A2A&color=fff&size=150" alt="Profile" class="profile-img">
+            </div>
+            <h1>YOUR NAME</h1>
+            <p class="bio-text">Professional Developer | Tech Enthusiast</p>
+            
+            <div class="status-badge open">
+                <div class="status-check-box">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <span>พร้อมเริ่มงานทันที (Available)</span>
+            </div>
+
+            </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'contacts')">
+                <i class="fa-solid fa-address-card"></i> Contact
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'socials')">
+                <i class="fa-solid fa-hashtag"></i> Socials
+            </button>
+        </nav>
+
+        <div id="contacts" class="tab-content active-content">
+            <a href="tel:+66812345678" class="link-card">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <span>โทรศัพท์</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+            <a href="mailto:contact@email.com" class="link-card">
+                <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+                <span>ส่งอีเมล</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+            <a href="https://line.me/ti/p/~yourid" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-brands fa-line"></i></div>
+                <span>Line Official</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+             <a href="https://goo.gl/maps/example" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                <span>แผนที่เดินทาง</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+        </div>
+
+        <div id="socials" class="tab-content">
+            <a href="#" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
+                <span>Facebook Page</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+            <a href="#" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-brands fa-instagram"></i></div>
+                <span>Instagram</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+            <a href="#" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-brands fa-tiktok"></i></div>
+                <span>TikTok Channel</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+             <a href="#" target="_blank" class="link-card">
+                <div class="icon-box"><i class="fa-brands fa-youtube"></i></div>
+                <span>YouTube</span>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2024 Your Company Name.</p>
+        </footer>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) { tabContents[i].classList.remove("active-content"); }
+            const tabLinks = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabLinks.length; i++) { tabLinks[i].classList.remove("active"); }
+            document.getElementById(tabName).classList.add("active-content");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
