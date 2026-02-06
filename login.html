@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Security Gate</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+        .login-box {
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.1);
+        }
+        .login-box h2 { text-transform: uppercase; margin-bottom: 20px; letter-spacing: 2px; }
+        .login-box span { color: #00ff88; }
+        
+        input {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            background: #000; border: 1px solid #444; color: #00ff88;
+            border-radius: 5px; font-size: 1.1rem; text-align: center;
+            box-sizing: border-box;
+        }
+        input:focus { outline: none; border-color: #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+
+        button {
+            width: 100%; padding: 15px; background: #00ff88; color: #000;
+            border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; transition: 0.3s;
+        }
+        button:hover { background: #fff; box-shadow: 0 0 20px #00ff88; }
+
+        .error-msg { color: #ff3333; margin-top: 15px; display: none; font-size: 0.9rem; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-box">
+        <h2>System <span>Locked</span></h2>
+        <p style="color:#aaa; margin-bottom:30px;">กรุณายืนยันตัวตนเพื่อเข้าสู่ระบบจัดการ</p>
+        
+        <input type="password" id="password" placeholder="Password Access Code">
+        <button onclick="login()">UNLOCK SYSTEM</button>
+        <p class="error-msg" id="msg"></p>
+    </div>
+
+    <script>
+        async function login() {
+            const pwd = document.getElementById('password').value;
+            const msg = document.getElementById('msg');
+            
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ password: pwd })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.href = '/admin.html'; // รหัสถูก ให้ไปหน้าแอดมิน
+                } else {
+                    msg.style.display = 'block';
+                    msg.innerText = data.message; // แสดงข้อความ error (เช่น รหัสผิด, โดนแบน)
+                    document.getElementById('password').value = '';
+                }
+            } catch (e) {
+                msg.style.display = 'block';
+                msg.innerText = "เชื่อมต่อ Server ไม่ได้";
+            }
+        }
+
+        // กด Enter เพื่อล็อกอินได้เลย
+        document.getElementById('password').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') login();
+        });
+    </script>
+</body>
+</html>

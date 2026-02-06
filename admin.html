@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Admin - จัดการร้านค้า</title>
+    <style>
+        /* CSS เดิม (ธีมมืด) */
+        :root { --primary-color: #00ff88; --danger-color: #ff3333; --bg-color: #121212; --card-bg: #1e1e1e; --text-color: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+        .admin-panel, .product-list { background-color: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid #333; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; }
+        .btn { width: 100%; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
+        .btn-add { background-color: var(--primary-color); color: #000; }
+        .btn-add:hover { background-color: #fff; box-shadow: 0 0 10px var(--primary-color); }
+        .btn-delete { background-color: var(--danger-color); color: #fff; padding: 5px 10px; width: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #333; }
+        th { color: var(--primary-color); }
+        h1 { text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+        span { color: var(--primary-color); }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Real-Time <span>Admin Panel</span></h1>
+
+    <div class="container">
+        <div class="admin-panel">
+            <h3>+ เพิ่มสินค้า (ลงระบบจริง)</h3>
+            <input type="text" id="p-name" placeholder="ชื่อสินค้า">
+            <input type="text" id="p-price" placeholder="ราคา (เช่น ฿ 100.00)">
+            <input type="text" id="p-category" placeholder="หมวดหมู่ (bloxfruits, starter, kinglegacy)" list="cat-list">
+            <datalist id="cat-list"><option value="bloxfruits"><option value="kinglegacy"><option value="starter"></datalist>
+            <input type="text" id="p-image" placeholder="ลิงก์รูปภาพ" value="https://via.placeholder.com/400x250/000000/00ff88?text=Item">
+            <select id="p-badge">
+                <option value="">- ไม่มีป้าย -</option>
+                <option value="ของหายาก">ของหายาก</option>
+                <option value="มาใหม่">มาใหม่</option>
+                <option value="ขายดี">ขายดี</option>
+            </select>
+            <textarea id="p-desc" rows="3" placeholder="รายละเอียด..."></textarea>
+            
+            <button class="btn btn-add" onclick="saveToDatabase()">⚡ บันทึกเข้าระบบทันที</button>
+        </div>
+
+        <div class="product-list">
+            <h3>สินค้าในระบบ <span id="status-msg" style="font-size:0.8rem; color:#aaa; float:right;">กำลังเชื่อมต่อ...</span></h3>
+            <table>
+                <thead><tr><th>ชื่อสินค้า</th><th>ราคา</th><th>จัดการ</th></tr></thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="products.js"></script>
+                <script src="products_part2.js"></script>
+    <script>
+        // โหลดข้อมูลเข้าตาราง
+        const currentProducts = (typeof products !== 'undefined') ? products : [];
+        const statusMsg = document.getElementById('status-msg');
+
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            // กลับด้าน array เพื่อให้ของใหม่สุดอยู่บนสุด (reverse)
+            [...currentProducts].reverse().forEach((item) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${item.name} <br><small style="color:#666">${item.id}</small></td>
+                        <td style="color:#00ff88;">${item.price}</td>
+                        <td><button class="btn btn-delete" onclick="deleteItem('${item.id}')">ลบถาวร</button></td>
+                    </tr>
+                `;
+            });
+            statusMsg.innerText = `ออนไลน์: ${currentProducts.length} รายการ`;
+            statusMsg.style.color = '#00ff88';
+        }
+
+        // --- ฟังก์ชันส่งข้อมูลไปให้ Server เขียนไฟล์ (หัวใจสำคัญ) ---
+        async function saveToDatabase() {
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const category = document.getElementById('p-category').value;
+            
+            if(!name || !price) { alert("ใส่ชื่อและราคาด้วยครับ"); return; }
+
+            // ตั้งค่า Badge
+            const badgeVal = document.getElementById('p-badge').value;
+            let badgeColor = "";
+            if(badgeVal === "ของหายาก") badgeColor = "bg-rare";
+            else if(badgeVal === "มาใหม่") badgeColor = "bg-new";
+            
+            const newItem = {
+                id: category.substring(0,2).toUpperCase() + "-" + Math.floor(Math.random() * 100000),
+                name: name,
+                price: price,
+                image: document.getElementById('p-image').value,
+                category: category,
+                badge: badgeVal,
+                badgeColor: badgeColor,
+                desc: document.getElementById('p-desc').value
+            };
+
+            // ส่งข้อมูลไปหลังบ้าน
+            statusMsg.innerText = "กำลังบันทึก...";
+            try {
+                const response = await fetch('/api/add-product', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newItem)
+                });
+
+                if(response.ok) {
+                    alert("✅ บันทึกสำเร็จ! ข้อมูลถูกเขียนลงไฟล์แล้ว");
+                    location.reload(); // รีเฟรชหน้าเพื่อดูข้อมูลใหม่
+                } else {
+                    alert("❌ บันทึกไม่สำเร็จ");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("เชื่อมต่อ Server ไม่ได้ (อย่าลืมรัน node server.js)");
+            }
+        }
+
+        // --- ฟังก์ชันสั่งลบไฟล์จริง ---
+        async function deleteItem(id) {
+            if(!confirm("⚠️ ยืนยันการลบ? ข้อมูลจะหายไปจากไฟล์จริงๆ กู้คืนไม่ได้")) return;
+
+            try {
+                const response = await fetch('/api/delete-product', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: id })
+                });
+
+                if(response.ok) {
+                    location.reload(); // รีเฟรชหน้า
+                } else {
+                    alert("ลบไม่สำเร็จ");
+                }
+            } catch (error) {
+                alert("เชื่อมต่อ Server ไม่ได้");
+            }
+        }
+
+        renderTable();
+    </script>
+</body>
+</html>

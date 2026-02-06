@@ -3,245 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bio Link | Official</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <title>ร้านขายไอดี Roblox - ID Shop</title>
     <style>
-        /* --- CONFIGURATION --- */
+        /* --- CSS: เหมือนเดิม 100% (ห้ามแก้ไข) --- */
         :root {
+            --primary-color: #00ff88;
             --bg-color: #121212;
-            --card-bg: #1E1E1E;
-            --card-hover: #2C2C2C;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A0A0A0;
-            --accent-color: #FFFFFF;
-            --icon-bg: #2A2A2A;
-            --border-radius: 16px;
-            
-            /* Status Colors */
-            --status-open-bg: rgba(46, 204, 113, 0.1); /* พื้นหลังเขียวจางๆ */
-            --status-open-text: #2ecc71; /* ข้อความสีเขียว */
-            --status-busy-bg: rgba(231, 76, 60, 0.15);
-            --status-busy-text: #e74c3c;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --hover-color: #00cc6a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Kanit', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; display: flex; justify-content: center; line-height: 1.6; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); }
 
-        .container {
-            width: 100%; max-width: 480px; padding: 60px 24px;
-            display: flex; flex-direction: column; min-height: 100vh;
+        /* Header & Hero */
+        header {
+            background: linear-gradient(90deg, #000000, #1a1a1a);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            position: sticky; top: 0; z-index: 100;
         }
+        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        header span { color: var(--primary-color); }
 
-        /* Profile Section */
-        .profile { text-align: center; margin-bottom: 35px; }
-        .profile-img-container {
-            width: 120px; height: 120px; margin: 0 auto 20px; position: relative;
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1600x600/121212/00ff88?text=Gaming+Background');
+            background-size: cover; background-position: center;
+            padding: 80px 20px; text-align: center;
+            border-bottom: 1px solid #333; margin-bottom: 40px;
         }
-        .profile-img {
-            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 2px solid #333;
-        }
-        h1 {
-            font-size: 1.8rem; font-weight: 600; color: var(--text-primary);
-            margin-bottom: 4px; letter-spacing: 0.5px;
-        }
-        .bio-text {
-            color: var(--text-secondary); font-size: 0.95rem; font-weight: 300;
-            margin-bottom: 16px;
-        }
-
-        /* --- UPDATED: Status Badge Styling --- */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 16px 6px 8px; /* ปรับ padding ให้เข้ากับไอคอนใหม่ */
-            border-radius: 30px; /* โค้งมนขึ้น */
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            margin-top: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* สถานะ: รับงาน (Open) - ใช้ไอคอนติ๊กถูก */
-        .status-badge.open {
-            background-color: var(--status-open-bg);
-            color: var(--status-open-text);
-            border: 1px solid rgba(46, 204, 113, 0.2);
-        }
-
-        /* ✅ กล่องวงกลมสีดำสำหรับไอคอนติ๊กถูก (New Feature) */
-        .status-check-box {
-            width: 22px;
-            height: 22px;
-            background-color: #000000; /* Pure Black Background */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+        .hero-content h2 { font-size: 3rem; margin-bottom: 15px; text-transform: uppercase; line-height: 1.2; }
+        .hero-content span { color: var(--primary-color); text-shadow: 0 0 15px rgba(0, 255, 136, 0.6); }
+        .hero-content p { font-size: 1.1rem; color: #cccccc; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
         
-        /* ไอคอนติ๊กถูกสีขาวด้านใน */
-        .status-check-box i {
-            color: #FFFFFF; /* Pure White Icon */
-            font-size: 0.7rem;
+        .btn-hero {
+            display: inline-block; background-color: var(--primary-color); color: #000;
+            padding: 12px 35px; font-size: 1.2rem; font-weight: bold; text-decoration: none;
+            border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-hero:hover { transform: scale(1.05); background-color: #fff; box-shadow: 0 0 25px rgba(0, 255, 136, 0.8); }
+
+        /* Container & Filter */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title {
+            text-align: center; margin-bottom: 30px; font-size: 1.8rem;
+            border-left: 5px solid var(--primary-color); display: inline-block; padding-left: 15px;
+        }
+        .category-filter { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .filter-btn {
+            background-color: #333; color: #fff; border: 1px solid #555; padding: 10px 25px;
+            border-radius: 30px; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;
+        }
+        .filter-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .filter-btn.active {
+            background-color: var(--primary-color); color: #000; border-color: var(--primary-color);
+            font-weight: bold; box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
         }
 
-        /* สถานะ: ไม่ว่าง (Busy) - ยังคงใช้จุดกะพริบแบบเดิม เพราะสื่อถึงการแจ้งเตือนได้ดี */
-        .status-badge.busy {
-            background-color: var(--status-busy-bg);
-            color: var(--status-busy-text);
-            border: 1px solid rgba(231, 76, 60, 0.2);
-            padding-left: 14px; /* ปรับ padding สำหรับแบบจุด */
+        /* Product Grid & Card */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .product-card {
+            background-color: var(--card-bg); border-radius: 10px; overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #333;
+            display: flex; flex-direction: column;
         }
+        .product-card.hide { display: none; }
+        .product-card.show { animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 136, 0.15); border-color: var(--primary-color); }
 
-        .status-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background-color: currentColor;
-            margin-right: 10px;
-            box-shadow: 0 0 8px currentColor;
-            animation: pulse 2s infinite;
+        .product-img { width: 100%; height: 200px; background-color: #333; display: flex; align-items: center; justify-content: center; color: #777; font-size: 0.9rem; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; }
+        .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .product-title { font-size: 1.2rem; margin-bottom: 10px; font-weight: bold; }
+        .product-desc { font-size: 0.9rem; color: #aaa; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
+        .product-price { font-size: 1.4rem; color: var(--primary-color); font-weight: bold; margin-bottom: 15px; }
+        
+        .btn-contact {
+            background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color);
+            padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 1rem;
+            font-weight: bold; transition: all 0.3s; text-align: center; text-decoration: none; display: block;
         }
-        @keyframes pulse {
-            0% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
-            70% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
-            100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
-        }
-
-        /* Tabs & Links (คงเดิม) */
-        .tabs {
-            display: flex; background: #181818; border-radius: var(--border-radius);
-            padding: 6px; margin-bottom: 30px;
-        }
-        .tab-btn {
-            flex: 1; padding: 12px; border: none; background: transparent;
-            color: #666; cursor: pointer; border-radius: 12px;
-            font-weight: 500; font-size: 1rem; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .tab-btn.active {
-            background: var(--card-bg); color: var(--text-primary);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-        .tab-content {
-            display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            flex-direction: column; gap: 14px; flex-grow: 1;
-        }
-        .tab-content.active-content { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .link-card {
-            display: flex; align-items: center; background: var(--card-bg);
-            padding: 18px 20px; border-radius: var(--border-radius);
-            text-decoration: none; color: var(--text-primary);
-            border: 1px solid rgba(255,255,255,0.05); transition: all 0.2s ease;
-        }
-        .link-card:hover {
-            transform: translateY(-3px); background: var(--card-hover);
-            border-color: rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .icon-box {
-            width: 40px; height: 40px; background: var(--icon-bg); border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; margin-right: 18px;
-            font-size: 1.2rem; color: var(--text-secondary); transition: 0.2s;
-        }
-        .link-card:hover .icon-box { background: var(--text-primary); color: var(--bg-color); }
-        .link-card span { flex-grow: 1; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.3px; }
-        .arrow { color: #444; font-size: 0.9rem; transition: 0.2s; }
-        .link-card:hover .arrow { color: var(--text-primary); transform: translateX(5px); }
-        footer { text-align: center; margin-top: 50px; color: #444; font-size: 0.8rem; font-weight: 300; }
+        .btn-contact:hover { background-color: var(--primary-color); color: #000; }
+        
+        footer { text-align: center; padding: 20px; margin-top: 50px; color: #666; font-size: 0.9rem; border-top: 1px solid #333; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 10px; }
+        .bg-rare { background-color: #ff9800; color: #000; }
+        .bg-new { background-color: #00d2ff; color: #000; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header class="profile">
-            <div class="profile-img-container">
-                <img src="https://ui-avatars.com/api/?name=Your+Name&background=2A2A2A&color=fff&size=150" alt="Profile" class="profile-img">
-            </div>
-            <h1>YOUR NAME</h1>
-            <p class="bio-text">Professional Developer | Tech Enthusiast</p>
-            
-            <div class="status-badge open">
-                <div class="status-check-box">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-                <span>พร้อมเริ่มงานทันที (Available)</span>
-            </div>
 
-            </header>
+    <header>
+        <h1>Roblox <span>Shop</span></h1>
+    </header>
 
-        <nav class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'contacts')">
-                <i class="fa-solid fa-address-card"></i> Contact
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'socials')">
-                <i class="fa-solid fa-hashtag"></i> Socials
-            </button>
-        </nav>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>ยินดีต้อนรับสู่ <span>Roblox ID Shop</span></h2>
+            <p>
+                เราคือแหล่งรวมไอดีเกมคุณภาพสูง ราคาประหยัด ปลอดภัย 100% <br>
+                มีสินค้าให้เลือกมากมาย ไม่ว่าจะเป็น Blox Fruits, King Legacy หรือไอดีไก่ตัน <br>
+                พร้อมบริการหลังการขายที่เป็นกันเอง
+            </p>
+            <a href="#shop-section" class="btn-hero">เลือกซื้อสินค้าเลย</a>
+        </div>
+    </section>
 
-        <div id="contacts" class="tab-content active-content">
-            <a href="tel:+66812345678" class="link-card">
-                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
-                <span>โทรศัพท์</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-            <a href="mailto:contact@email.com" class="link-card">
-                <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-                <span>ส่งอีเมล</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-            <a href="https://line.me/ti/p/~yourid" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-brands fa-line"></i></div>
-                <span>Line Official</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-             <a href="https://goo.gl/maps/example" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
-                <span>แผนที่เดินทาง</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
+    <div class="container" id="shop-section">
+        <div style="text-align: center;">
+            <h2 class="section-title">เลือกหมวดหมู่สินค้า</h2>
         </div>
 
-        <div id="socials" class="tab-content">
-            <a href="#" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
-                <span>Facebook Page</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-            <a href="#" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-brands fa-instagram"></i></div>
-                <span>Instagram</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-            <a href="#" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-brands fa-tiktok"></i></div>
-                <span>TikTok Channel</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
-             <a href="#" target="_blank" class="link-card">
-                <div class="icon-box"><i class="fa-brands fa-youtube"></i></div>
-                <span>YouTube</span>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
+        <div class="category-filter">
+            <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+            <button class="filter-btn" data-filter="bloxfruits">Blox Fruits</button>
+            <button class="filter-btn" data-filter="kinglegacy">King Legacy</button>
+            <button class="filter-btn" data-filter="starter">ID ไก่ตัน</button>
         </div>
 
-        <footer>
-            <p>© 2024 Your Company Name.</p>
-        </footer>
+        <div class="product-grid" id="product-list"></div>
     </div>
 
-    <script>
-        function openTab(evt, tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) { tabContents[i].classList.remove("active-content"); }
-            const tabLinks = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < tabLinks.length; i++) { tabLinks[i].classList.remove("active"); }
-            document.getElementById(tabName).classList.add("active-content");
-            evt.currentTarget.classList.add("active");
+    <footer>
+            <style>
+        /* CSS เฉพาะส่วน Footer (เพิ่มต่อท้ายใน <style> หรือวางไว้ตรงนี้ก็ได้) */
+        .site-footer {
+            background-color: #0a0a0a;
+            background-image: linear-gradient(to top, rgba(0, 255, 136, 0.05), transparent);
+            border-top: 4px solid var(--primary-color); /* เส้นขอบนสีเขียว */
+            padding: 60px 0 20px 0;
+            margin-top: 80px;
+            font-size: 0.95rem;
+            color: #b0b0b0;
         }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* แบ่งคอลัมน์อัตโนมัติ */
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-col h3 span {
+            color: var(--primary-color);
+        }
+
+        .footer-col p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 10px; /* ลูกเล่นขยับขวาตอนเอาเมาส์ชี้ */
+        }
+
+        .social-btn {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #333;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary-color);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            font-size: 0.85rem;
+        }
+    </style>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h3>ROBLOX <span>SHOP</span></h3>
+                <p>
+                    เราให้บริการจำหน่ายไอดีเกม Roblox คุณภาพสูง 
+                    ปลอดภัย 100% ด้วยประสบการณ์การขายยาวนาน 
+                    รับประกันหลังการขายทุกไอดี ไม่โกง ไม่เกรียน
+                </p>
+                <div style="margin-top: 20px;">
+                    <a href="#" class="social-btn">F</a>
+                    <a href="#" class="social-btn">D</a> <a href="#" class="social-btn">L</a> </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>เมนู<span>ลัด</span></h3>
+                <ul class="footer-links">
+                    <li><a href="#">➤ หน้าแรก</a></li>
+                    <li><a href="#product-list">➤ สินค้าทั้งหมด</a></li>
+                    <li><a href="#">➤ วิธีการสั่งซื้อ</a></li>
+                    <li><a href="#">➤ แจ้งชำระเงิน</a></li>
+                    <li><a href="#">➤ เช็คเครดิตร้าน</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>ติดต่อ<span>เรา</span></h3>
+                <ul class="footer-links">
+                    <li><span>📞 เบอร์โทร: 0XX-XXX-XXXX</span></li>
+                    <li><span>💬 Line ID: @RobloxShop</span></li>
+                    <li><span>⏰ เวลาทำการ: 10.00 - 22.00 น.</span></li>
+                    <li style="margin-top: 15px;">
+                        <a href="#" class="btn-contact" onclick="contactSeller('ติดต่อทั่วไป')" 
+                           style="text-align:center; padding: 8px;">
+                           ทักแชทแอดมิน
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2024 Roblox Shop All Rights Reserved. | ออกแบบโดย AI Assistant</p>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    
+    <script src="products_part2.js"></script>
+
+    <script>
+        const contactUrl = "https://www.facebook.com/YOUR_PAGE_LINK"; 
+        const productList = document.getElementById('product-list');
+
+        // ฟังก์ชันสร้างการ์ดสินค้าจากข้อมูล
+        function renderProducts() {
+            let html = '';
+            
+            // วนลูปดึงข้อมูลจากตัวแปร products ในไฟล์ products.js
+            products.forEach(item => {
+                // เช็คว่ามีป้าย Badge หรือไม่
+                let badgeHtml = '';
+                if(item.badge) {
+                    badgeHtml = `<div><span class="badge ${item.badgeColor}">${item.badge}</span></div>`;
+                }
+
+                html += `
+                    <div class="product-card show" data-category="${item.category}">
+                        <div class="product-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="product-info">
+                            ${badgeHtml}
+                            <h3 class="product-title">${item.name}</h3>
+                            <p class="product-desc">${item.desc}</p>
+                            <div class="product-price">${item.price}</div>
+                            <a href="#" class="btn-contact" onclick="contactSeller('${item.name}')">สนใจ / สั่งซื้อ</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            productList.innerHTML = html;
+        }
+
+        // เรียกใช้งานฟังก์ชันเพื่อแสดงสินค้า
+        renderProducts();
+
+        // ฟังก์ชันติดต่อผู้ขาย (เหมือนเดิม)
+        function contactSeller(productName) {
+            if(confirm("ติดต่อแอดมินเพื่อซื้อสินค้า: " + productName + " ?")) {
+                window.open(contactUrl, '_blank');
+            }
+        }
+
+        // ระบบกรองสินค้า (ปรับปรุงให้รองรับสินค้าที่สร้างจาก JS)
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // จัดการปุ่ม Active
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+                // ต้องเลือก product-card ใหม่ทุกครั้งเพราะมันถูกสร้างขึ้นมาใหม่
+                const cards = document.querySelectorAll('.product-card');
+
+                cards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.classList.remove('hide');
+                        card.classList.add('show');
+                        card.style.display = 'flex'; // บังคับแสดงผล
+                    } else {
+                        card.classList.add('hide');
+                        card.classList.remove('show');
+                        setTimeout(() => {
+                             if(card.classList.contains('hide')) card.style.display = 'none'; 
+                        }, 50); // ซ่อนหลังจากอนิเมชั่นนิดหน่อย
+                    }
+                });
+            });
+        });
     </script>
+        
+        <style>
+    /* CSS ตกแต่งเหมือนเดิม */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+        display: none; justify-content: center; align-items: center; z-index: 9999;
+        opacity: 0; transition: opacity 0.3s ease;
+    }
+
+    .modal-box {
+        background: #151515;
+        border: 2px solid var(--primary-color);
+        border-radius: 15px; padding: 30px;
+        width: 90%; max-width: 400px; text-align: center;
+        box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-box h3 { color: #fff; font-size: 1.8rem; margin-bottom: 10px; text-transform: uppercase; }
+    .modal-box h3 span { color: var(--primary-color); }
+    .modal-box p { color: #bbb; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.5; }
+
+    .modal-actions { display: flex; gap: 15px; justify-content: center; }
+    .btn-modal { padding: 12px 25px; border-radius: 50px; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn-confirm-ok { background: var(--primary-color); color: #000; box-shadow: 0 0 15px var(--primary-color); }
+    .btn-confirm-ok:hover { transform: scale(1.05); background: #fff; }
+    .btn-cancel-no { background: #333; color: #fff; border: 1px solid #555; }
+    .btn-cancel-no:hover { background: #444; border-color: #fff; }
+
+    .modal-overlay.active { display: flex; opacity: 1; }
+    .modal-overlay.active .modal-box { transform: scale(1); }
+</style>
+
+<div id="gaming-modal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>ยืนยัน <span>คำสั่งซื้อ</span></h3>
+        <p id="modal-msg">รายละเอียดสินค้า...</p>
+        <div class="modal-actions">
+            <button class="btn-modal btn-cancel-no" onclick="closeModal()">ยกเลิก</button>
+            <button class="btn-modal btn-confirm-ok" id="btn-go-chat">✅ ไปที่แชท</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- JavaScript (ฉบับอัปเกรด) ---
+    const modal = document.getElementById('gaming-modal');
+    const modalMsg = document.getElementById('modal-msg');
+    const btnGoChat = document.getElementById('btn-go-chat');
+    
+    // ฟังก์ชัน contactSeller ตัวใหม่
+    function contactSeller(productName) {
+        
+        // 1. เช็คก่อนเลยว่า เป็นการกดปุ่ม "ติดต่อทั่วไป" หรือไม่?
+        // ถ้าใช่ -> ให้เปิดลิงก์แชทเลย ไม่ต้องโชว์ Modal
+        if (productName === 'ติดต่อทั่วไป') {
+            window.open(contactUrl, '_blank');
+            return; // จบการทำงานตรงนี้
+        }
+
+        // 2. ถ้าไม่ใช่ (แสดงว่ากดซื้อสินค้า) -> ให้โชว์ Modal ตามปกติ
+        modalMsg.innerHTML = `คุณต้องการติดต่อแอดมินเพื่อซื้อสินค้า:<br><b style="color:#fff; font-size:1.2em;">"${productName}"</b><br>ใช่หรือไม่?`;
+        
+        btnGoChat.onclick = function() {
+            window.open(contactUrl, '_blank');
+            closeModal();
+        };
+
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+</script>
+        
+        <style>
+    .live-stats-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid var(--primary-color, #00ff88);
+        border-radius: 12px;
+        padding: 15px;
+        display: flex;
+        gap: 20px;
+        color: #fff;
+        font-family: 'Kanit', sans-serif;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
+        z-index: 10000;
+        animation: slideUp 0.5s ease-out;
+        backdrop-filter: blur(5px);
+    }
+
+    .stat-item {
+        text-align: center;
+        min-width: 80px;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color, #00ff88);
+        display: block;
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        transition: transform 0.2s;
+    }
+    
+    /* เอฟเฟกต์ตอนตัวเลขเปลี่ยน */
+    .stat-value.pulse {
+        transform: scale(1.3);
+        color: #fff;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .live-dot {
+        width: 10px; height: 10px;
+        background-color: #ff3333;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+        box-shadow: 0 0 10px #ff3333;
+        animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* ปรับมือถือ */
+    @media (max-width: 600px) {
+        .live-stats-panel { bottom: 10px; right: 10px; padding: 10px; gap: 15px; }
+        .stat-value { font-size: 1.2rem; }
+    }
+</style>
+
+<div class="live-stats-panel">
+    <div style="position: absolute; top: -10px; left: 10px; background: #000; padding: 0 5px; font-size: 0.7rem; color: #ff3333; font-weight: bold; border: 1px solid #333; border-radius: 4px;">
+        <span class="live-dot"></span>LIVE
+    </div>
+    
+    <div class="stat-item">
+        <span class="stat-value" id="live-visitors">0</span>
+        <span class="stat-label">คนออนไลน์</span>
+    </div>
+    <div style="width: 1px; background: #333;"></div> <div class="stat-item">
+        <span class="stat-value" id="live-products">0</span>
+        <span class="stat-label">สินค้าทั้งหมด</span>
+    </div>
+</div>
+
+<script>
+    // --- ระบบรับข้อมูล Real-time (SSE Client) ---
+    // เชื่อมต่อกับ Server โดยตรงผ่านช่องทางพิเศษ /api/stream
+    
+    const evtSource = new EventSource("/api/stream");
+    const elVisitors = document.getElementById('live-visitors');
+    const elProducts = document.getElementById('live-products');
+
+    evtSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        
+        // อัปเดตตัวเลข
+        updateNumber(elVisitors, data.visitors);
+        updateNumber(elProducts, data.products);
+    };
+
+    // ฟังก์ชันทำเอฟเฟกต์ตัวเลขเด้งๆ เวลาค่าเปลี่ยน
+    function updateNumber(element, newValue) {
+        if (element.innerText != newValue) {
+            element.innerText = newValue;
+            element.classList.add('pulse'); // ใส่เอฟเฟกต์
+            setTimeout(() => element.classList.remove('pulse'), 300); // ลบเอฟเฟกต์
+        }
+    }
+</script>
+
 </body>
 </html>
